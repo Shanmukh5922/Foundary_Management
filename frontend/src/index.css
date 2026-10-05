@@ -1,0 +1,511 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #080a0f;
+  color: #f4f4f4;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  background-color: #080a0f;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(115deg, rgba(255, 113, 48, 0.035), transparent 42%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 245px;
+  height: 100vh;
+
+  padding: 28px 18px;
+
+  background: rgba(10, 12, 17, 0.82);
+  backdrop-filter: blur(20px);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  z-index: 20;
+}
+
+.sidebar-logo {
+  padding: 10px 12px 28px;
+}
+
+.sidebar-logo h1 {
+  font-size: 21px;
+  letter-spacing: 2px;
+}
+
+.sidebar-logo span {
+  color: #ff7130;
+}
+
+.sidebar-logo p {
+  margin-top: 6px;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar nav a {
+  position: relative;
+
+  padding: 12px 14px;
+
+  color: #92959c;
+  text-decoration: none;
+
+  border-radius: 10px;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: #fff;
+  background: rgba(255, 106, 0, 0.08);
+  transform: translateX(5px);
+}
+
+.sidebar nav a.active {
+  color: #fff;
+  background: rgba(255, 106, 0, 0.12);
+}
+
+.sidebar nav a.active::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 25%;
+
+  width: 3px;
+  height: 50%;
+
+  border-radius: 5px;
+
+  background: #ff7130;
+  box-shadow: 0 0 12px #ff7130;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+  position: relative;
+  z-index: 2;
+
+  margin-left: 245px;
+
+  min-height: 100vh;
+
+  padding: 45px;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 35px;
+}
+
+.page-title p {
+  color: #ff7130;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.page-title h2 {
+  font-size: 34px;
+  font-weight: 600;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+  font-family: inherit;
+}
+
+.add-button,
+.save-button {
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 9px;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #ff7130,
+    #ff4b00
+  );
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 20px rgba(255, 91, 0, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.add-button:hover,
+.save-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 30px rgba(255, 91, 0, 0.25);
+}
+
+.cancel-button {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: transparent;
+
+  color: #aaa;
+
+  padding: 12px 20px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+}
+
+.close-button {
+  border: none;
+  background: transparent;
+
+  color: #888;
+
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-container {
+  padding: 28px;
+
+  margin-bottom: 30px;
+
+  border-radius: 16px;
+
+  background: rgba(18, 21, 28, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  animation: formAppear 0.45s ease;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.form-header p {
+  color: #ff7130;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.form-header h3 {
+  font-size: 21px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  outline: none;
+
+  background: rgba(0, 0, 0, 0.25);
+
+  color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ff7130;
+
+  box-shadow:
+    0 0 0 2px rgba(255, 113, 48, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.table-container {
+  overflow-x: auto;
+
+  border-radius: 16px;
+
+  background: rgba(16, 19, 25, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  backdrop-filter: blur(18px);
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+thead {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+th {
+  padding: 16px;
+
+  text-align: left;
+
+  color: #777;
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+td {
+  padding: 17px 16px;
+
+  color: #bbb;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tbody tr {
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 106, 0, 0.035);
+}
+
+td strong {
+  color: white;
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.edit-button,
+.delete-button {
+  border: none;
+
+  padding: 7px 12px;
+
+  margin-right: 7px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+.edit-button {
+  background: rgba(255, 170, 70, 0.12);
+  color: #ffb66d;
+}
+
+.delete-button {
+  background: rgba(255, 70, 70, 0.1);
+  color: #ff7777;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-pass {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  color: #79e6a4;
+
+  background: rgba(60, 200, 110, 0.1);
+}
+
+.status-fail {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  color: #ff7474;
+
+  background: rgba(255, 70, 70, 0.1);
+}
+
+.status-message {
+  color: #999;
+}
+
+.error-message {
+  color: #ff7474;
+
+  padding: 20px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 190px;
+  }
+
+  .main-content {
+    margin-left: 190px;
+    padding: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .sidebar {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .page-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+}
